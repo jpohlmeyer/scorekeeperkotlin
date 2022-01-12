@@ -3,7 +3,7 @@ package com.github.jpohlmeyer.scorekeeperkotlin.playerlist
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-class PlayerNameTouchHelperCallback(private val adapter: OnTouchAdapter) :
+class PlayerNameTouchHelperCallback(private val onListTouchListener: OnListTouchListener) :
     ItemTouchHelper.SimpleCallback(
         ItemTouchHelper.UP or ItemTouchHelper.DOWN,
         ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -14,10 +14,10 @@ class PlayerNameTouchHelperCallback(private val adapter: OnTouchAdapter) :
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        return adapter.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+        return onListTouchListener.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        adapter.onItemDismiss(viewHolder.adapterPosition)
+        onListTouchListener.onItemDismiss(viewHolder.adapterPosition)
     }
 }

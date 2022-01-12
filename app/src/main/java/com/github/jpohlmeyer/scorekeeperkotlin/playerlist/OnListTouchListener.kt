@@ -1,6 +1,6 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.playerlist
 
-interface OnTouchAdapter {
+interface OnListTouchListener {
     fun onItemMove(fromPosition: Int, toPosition: Int): Boolean
 
     fun onItemDismiss(position: Int)

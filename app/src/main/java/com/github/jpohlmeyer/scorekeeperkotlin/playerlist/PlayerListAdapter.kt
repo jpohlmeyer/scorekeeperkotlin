@@ -11,7 +11,7 @@ import com.github.jpohlmeyer.scorekeeperkotlin.databinding.PlayerNameBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : RecyclerView.Adapter<PlayerNameViewHolder>(), OnTouchAdapter {
+class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : RecyclerView.Adapter<PlayerNameViewHolder>() {
 
     private val STRINGS = arrayOf(
         "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
@@ -34,11 +34,11 @@ class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : 
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: PlayerNameViewHolder, position: Int) {
         holder.getTextView().setText(items[position])
-        holder.getDraghandleView().setOnTouchListener { view: View?, event: MotionEvent ->
+        holder.getDraghandleView().setOnTouchListener { _, event: MotionEvent ->
             if (event.actionMasked == MotionEvent.ACTION_DOWN) {
                 onStartDragListener.onStartDrag(holder)
             }
-            false
+            return@setOnTouchListener false
         }
     }
 
@@ -46,13 +46,13 @@ class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : 
         return items.size
     }
 
-    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+    fun itemMove(fromPosition: Int, toPosition: Int): Boolean {
         Collections.swap(items, fromPosition, toPosition)
         notifyItemMoved(fromPosition, toPosition)
         return true
     }
 
-    override fun onItemDismiss(position: Int) {
+    fun itemDismiss(position: Int) {
         items.removeAt(position)
         notifyItemRemoved(position)
     }
