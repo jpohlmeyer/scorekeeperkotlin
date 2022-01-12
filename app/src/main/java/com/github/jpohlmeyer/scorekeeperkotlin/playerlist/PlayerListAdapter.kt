@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.R
+import com.github.jpohlmeyer.scorekeeperkotlin.databinding.PlayerNameBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -26,9 +27,8 @@ class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerNameViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.player_name, parent, false)
-        return PlayerNameViewHolder(view)
+        val binding = PlayerNameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PlayerNameViewHolder(binding)
     }
 
     @SuppressLint("ClickableViewAccessibility")

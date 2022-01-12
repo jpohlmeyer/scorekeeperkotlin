@@ -1,15 +1,17 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.playerlist
 
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.R
+import com.github.jpohlmeyer.scorekeeperkotlin.databinding.PlayerNameBinding
 
-class PlayerNameViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
+class PlayerNameViewHolder(private val binding: PlayerNameBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    private var textView: TextView = itemView.findViewById(R.id.playername)
-    private var draghandleView: ImageView = itemView.findViewById(R.id.draghandle)
+    private var textView: TextView = binding.playername
+    private var draghandleView: ImageView = binding.draghandle
 
     fun getTextView(): TextView {
         return textView
