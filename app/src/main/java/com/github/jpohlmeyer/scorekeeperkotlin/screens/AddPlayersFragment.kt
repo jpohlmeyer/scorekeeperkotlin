@@ -1,4 +1,4 @@
-package com.github.jpohlmeyer.scorekeeperkotlin
+package com.github.jpohlmeyer.scorekeeperkotlin.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentAddPlayersBinding
-import com.github.jpohlmeyer.scorekeeperkotlin.playerlist.OnListTouchListener
-import com.github.jpohlmeyer.scorekeeperkotlin.playerlist.OnStartDragListener
-import com.github.jpohlmeyer.scorekeeperkotlin.playerlist.PlayerListAdapter
-import com.github.jpohlmeyer.scorekeeperkotlin.playerlist.PlayerNameTouchHelperCallback
+import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnListTouchListener
+import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnStartDragListener
+import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.PlayerListAdapter
+import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.PlayerNameTouchHelperCallback
 
 class AddPlayersFragment : Fragment(), OnStartDragListener, OnListTouchListener {
 
@@ -33,7 +33,8 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnListTouchListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         playerlistView = binding.playerlist
         playerlistView.layoutManager = LinearLayoutManager(context)
-        playerlistView.adapter = PlayerListAdapter(this)
+        playerListAdapter = PlayerListAdapter(this)
+        playerlistView.adapter = playerListAdapter
 
         itemTouchHelper = ItemTouchHelper(PlayerNameTouchHelperCallback(this))
         itemTouchHelper.attachToRecyclerView(playerlistView)

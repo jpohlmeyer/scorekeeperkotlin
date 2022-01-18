@@ -1,4 +1,4 @@
-package com.github.jpohlmeyer.scorekeeperkotlin.playerlist
+package com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist
 
 import androidx.recyclerview.widget.RecyclerView
 

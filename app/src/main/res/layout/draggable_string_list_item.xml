@@ -6,12 +6,12 @@
     android:background="@color/purple_200">
 
     <TextView
-        android:id="@+id/playername"
+        android:id="@+id/string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textSize="20dp"
-        android:text="playername"
+        android:text="string"
         />
 
     <ImageView

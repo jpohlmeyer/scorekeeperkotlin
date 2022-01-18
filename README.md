@@ -2,7 +2,7 @@
 
 ## TODO
 
-- [ ] Technical: Fragments and Navigation Graph
+- [x] Technical: Fragments and Navigation Graph
 - [ ] Technical: ViewModel
 - [ ] Feature: Add and sort players in a list
 - [ ] Feature: Start a game with the players on the list

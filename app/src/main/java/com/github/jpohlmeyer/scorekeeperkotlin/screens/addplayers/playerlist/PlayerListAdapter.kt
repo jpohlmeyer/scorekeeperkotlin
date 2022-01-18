@@ -1,15 +1,12 @@
-package com.github.jpohlmeyer.scorekeeperkotlin.playerlist
+package com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.jpohlmeyer.scorekeeperkotlin.R
-import com.github.jpohlmeyer.scorekeeperkotlin.databinding.PlayerNameBinding
+import com.github.jpohlmeyer.scorekeeperkotlin.databinding.DraggableStringListItemBinding
 import java.util.*
-import kotlin.collections.ArrayList
 
 class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : RecyclerView.Adapter<PlayerNameViewHolder>() {
 
@@ -21,7 +18,7 @@ class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : 
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerNameViewHolder {
-        val binding = PlayerNameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = DraggableStringListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PlayerNameViewHolder(binding)
     }
 
