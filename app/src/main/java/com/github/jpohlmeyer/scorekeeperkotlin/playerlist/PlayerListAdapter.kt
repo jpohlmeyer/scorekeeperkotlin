@@ -13,18 +13,12 @@ import kotlin.collections.ArrayList
 
 class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : RecyclerView.Adapter<PlayerNameViewHolder>() {
 
-    private val STRINGS = arrayOf(
-        "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+    private val items: MutableList<String?> = mutableListOf(
+            "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
         "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
         "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
         "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"
     )
-
-    private val items: MutableList<String?> = ArrayList()
-
-    init {
-        items.addAll(Arrays.asList(*STRINGS))
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerNameViewHolder {
         val binding = PlayerNameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
