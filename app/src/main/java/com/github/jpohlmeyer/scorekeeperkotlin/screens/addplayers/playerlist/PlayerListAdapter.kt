@@ -1,6 +1,7 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ViewGroup

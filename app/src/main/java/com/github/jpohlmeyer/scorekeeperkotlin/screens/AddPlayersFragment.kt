@@ -1,6 +1,7 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.screens
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,23 +67,17 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         playerListAdapter.itemMove(fromPosition, toPosition)
-        val playerList: MutableList<Player> = viewModel.playerLiveData.value!!
-        Collections.swap(playerList, fromPosition, toPosition)
-        viewModel.playerLiveData.value = playerList
+        viewModel.movePlayer(fromPosition, toPosition)
     }
 
     override fun onItemDismiss(position: Int) {
         playerListAdapter.itemDismiss(position)
-        val playerList: MutableList<Player> = viewModel.playerLiveData.value!!
-        playerList.removeAt(position)
-        viewModel.playerLiveData.value = playerList
+        viewModel.deletePlayer(position)
     }
 
     private fun onItemAdded(player: Player) {
         playerListAdapter.itemAdd(player)
-        val playerList: MutableList<Player> = viewModel.playerLiveData.value!!
-        playerList.add(player)
-        viewModel.playerLiveData.value = playerList
+        viewModel.addPlayer(player)
     }
 
     override fun onDestroyView() {
