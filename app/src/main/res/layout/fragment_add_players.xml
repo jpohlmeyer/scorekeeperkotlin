@@ -46,22 +46,57 @@
         android:paddingEnd="80dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/navigate_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
         <EditText
+            android:id="@+id/add_player_name"
+            android:hint="Add a new Player"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:layout_marginEnd="10dp"/>
 
         <ImageButton
+            android:id="@+id/add_player_button"
             android:background="@null"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             app:srcCompat="@drawable/ic_baseline_add_box_48" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/teal_200"
+        android:id="@+id/navigate_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="80dp"
+        android:paddingEnd="80dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageButton
+            android:id="@+id/before_button"
+            android:background="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_baseline_navigate_before_24" />
+
+        <ImageButton
+            android:id="@+id/next_button"
+            android:background="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            app:srcCompat="@drawable/ic_baseline_navigate_next_24" />
 
     </LinearLayout>
 

@@ -6,16 +6,14 @@ import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.DraggableStringListItemBinding
+import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
 import java.util.*
 
-class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : RecyclerView.Adapter<PlayerNameViewHolder>() {
+class PlayerListAdapter(
+    private val onStartDragListener: OnStartDragListener
+    ) : RecyclerView.Adapter<PlayerNameViewHolder>() {
 
-    private val items: MutableList<String?> = mutableListOf(
-            "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
-        "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
-        "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
-        "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"
-    )
+    private var playerList: MutableList<Player> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerNameViewHolder {
         val binding = DraggableStringListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,8 +22,8 @@ class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : 
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: PlayerNameViewHolder, position: Int) {
-        holder.getTextView().setText(items[position])
-        holder.getDraghandleView().setOnTouchListener { _, event: MotionEvent ->
+        holder.textView.text = playerList[position].name
+        holder.draghandleView.setOnTouchListener { _, event: MotionEvent ->
             if (event.actionMasked == MotionEvent.ACTION_DOWN) {
                 onStartDragListener.onStartDrag(holder)
             }
@@ -34,18 +32,31 @@ class PlayerListAdapter(private val onStartDragListener: OnStartDragListener) : 
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return playerList.size
     }
 
-    fun itemMove(fromPosition: Int, toPosition: Int): Boolean {
-        Collections.swap(items, fromPosition, toPosition)
+    fun itemMove(fromPosition: Int, toPosition: Int) {
+        Collections.swap(playerList, fromPosition, toPosition)
         notifyItemMoved(fromPosition, toPosition)
-        return true
     }
 
     fun itemDismiss(position: Int) {
-        items.removeAt(position)
+        playerList.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    fun itemAdd(player: Player) {
+        playerList.add(player)
+        notifyItemInserted(playerList.size - 1)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updatePlayerList(playerList: List<Player>) {
+        if (this.playerList != playerList) {
+            this.playerList.clear()
+            this.playerList.addAll(playerList)
+            notifyDataSetChanged()
+        }
     }
 
 

@@ -23,7 +23,6 @@
         />
 
     <ScrollView
-        android:id="@+id/gamelist"
         android:background="@color/teal_700"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,16 +34,10 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
+            android:id="@+id/gamelist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/simpleGameButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Simple Game" />
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
 
     </ScrollView>
 
