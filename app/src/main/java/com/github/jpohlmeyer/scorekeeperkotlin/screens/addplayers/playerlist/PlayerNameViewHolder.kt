@@ -6,6 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.DraggableStringListItemBinding
 
 class PlayerNameViewHolder(binding: DraggableStringListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    var textView: TextView = binding.string
+    var textView: TextView = binding.playername
     var draghandleView: ImageView = binding.draghandle
 }

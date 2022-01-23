@@ -4,31 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.AddPlayersFragment">
+    tools:context=".screens.AddPlayersFragment" >
 
     <TextView
         android:id="@+id/headline"
-        android:background="@color/teal_200"
+        android:background="@color/orange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Who are you playing with?"
+        android:text="@string/who_are_you_playing_with"
         android:paddingBottom="20dp"
         android:paddingTop="20dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:textAlignment="center"
         />
 
+    <!--android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playerlist"
-        android:background="@color/teal_700"
+        android:background="@color/light_gray"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headline"
@@ -37,8 +38,8 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
-        android:background="@color/teal_200"
         android:id="@+id/add_player_layout"
+        android:background="@color/orange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -46,17 +47,20 @@
         android:paddingEnd="80dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@id/navigate_layout"
+        app:layout_constraintBottom_toTopOf="@id/divider"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
         <EditText
             android:id="@+id/add_player_name"
-            android:hint="Add a new Player"
+            android:hint="@string/add_a_new_player"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/dark_gray"
+            android:maxLength="12"
+            />
 
         <ImageButton
             android:id="@+id/add_player_button"
@@ -68,12 +72,22 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/medium_gray"
+        app:layout_constraintBottom_toTopOf="@id/navigate_layout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
     <LinearLayout
-        android:background="@color/teal_200"
+        android:background="@color/orange"
         android:id="@+id/navigate_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingStart="80dp"
         android:paddingEnd="80dp"
         android:paddingTop="10dp"
@@ -82,21 +96,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <ImageButton
-            android:id="@+id/before_button"
-            android:background="@null"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            app:srcCompat="@drawable/ic_baseline_navigate_before_24" />
+            android:text="@string/start_game"/>
 
-        <ImageButton
-            android:id="@+id/next_button"
-            android:background="@null"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            app:srcCompat="@drawable/ic_baseline_navigate_next_24" />
 
     </LinearLayout>
 

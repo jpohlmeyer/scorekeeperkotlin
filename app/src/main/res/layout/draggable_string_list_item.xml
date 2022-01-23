@@ -3,23 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/purple_200">
+    android:background="@color/dark_gray">
 
     <TextView
-        android:id="@+id/string"
+        android:id="@+id/playername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textSize="20dp"
-        android:text="string"
+        android:textSize="20sp"
+        android:text=""
+        android:layout_marginStart="80dp"
+        android:maxLength="11"
+        android:textColor="@color/white"
         />
 
     <ImageView
         android:id="@+id/draghandle"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|end"
         android:scaleType="center"
-        android:src="@drawable/ic_baseline_reorder_24" />
+        android:src="@drawable/ic_baseline_reorder_40"
+        android:layout_marginEnd="80dp" />
 
 </FrameLayout>

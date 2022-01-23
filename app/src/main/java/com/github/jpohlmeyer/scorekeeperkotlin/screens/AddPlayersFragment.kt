@@ -31,7 +31,7 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddPlayersBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -84,8 +84,6 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
         playerList.add(player)
         viewModel.playerLiveData.value = playerList
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()
