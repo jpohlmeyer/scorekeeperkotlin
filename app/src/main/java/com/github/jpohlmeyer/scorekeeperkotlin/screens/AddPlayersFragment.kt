@@ -1,7 +1,6 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.screens
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,15 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentAddPlayersBinding
-import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
+import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.AddPlayersViewModel
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnTouchListChangedListener
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnStartDragListener
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.PlayerListAdapter
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.PlayerNameTouchHelperCallback
-import java.util.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedListener {
 
     private var _binding: FragmentAddPlayersBinding? = null
@@ -47,7 +47,7 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
         itemTouchHelper.attachToRecyclerView(playerlistView)
 
 
-        val playerListObserver = Observer<List<Player>> { newList ->
+        val playerListObserver = Observer<List<SimplePlayer>> { newList ->
             playerListAdapter.updatePlayerList(newList)
         }
         viewModel.playerLiveData.observe(viewLifecycleOwner, playerListObserver)
@@ -56,7 +56,7 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
     }
 
     private fun addPlayerOnClick(view: View) {
-        val player = Player(binding.addPlayerName.text.toString())
+        val player = SimplePlayer(binding.addPlayerName.text.toString())
         onItemAdded(player)
         binding.addPlayerName.setText("")
     }
@@ -75,7 +75,7 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
         viewModel.deletePlayer(position)
     }
 
-    private fun onItemAdded(player: Player) {
+    private fun onItemAdded(player: SimplePlayer) {
         playerListAdapter.itemAdd(player)
         viewModel.addPlayer(player)
     }

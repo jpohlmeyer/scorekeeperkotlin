@@ -13,7 +13,9 @@ import androidx.navigation.fragment.findNavController
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentStartBinding
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.start.StartViewModel
 import com.google.android.material.button.MaterialButton
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StartFragment : Fragment() {
 
     private var _binding: FragmentStartBinding? = null
@@ -35,9 +37,9 @@ class StartFragment : Fragment() {
             val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT)
             button.layoutParams = layoutParams
-            button.text = it
+            button.text = it.gameTypeName
             button.setOnClickListener {
-                // TODO choose which game
+                // TODO choose which game, maybe gameService.setGame()?
                 val action = StartFragmentDirections.actionStartFragmentToAddPlayersFragment()
                 findNavController().navigate(action)
             }

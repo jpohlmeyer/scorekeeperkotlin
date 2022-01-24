@@ -1,20 +1,19 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.DraggableStringListItemBinding
-import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
+import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
 import java.util.*
 
 class PlayerListAdapter(
     private val onStartDragListener: OnStartDragListener
     ) : RecyclerView.Adapter<PlayerNameViewHolder>() {
 
-    private var playerList: MutableList<Player> = mutableListOf()
+    private var playerList: MutableList<SimplePlayer> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerNameViewHolder {
         val binding = DraggableStringListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -46,13 +45,13 @@ class PlayerListAdapter(
         notifyItemRemoved(position)
     }
 
-    fun itemAdd(player: Player) {
+    fun itemAdd(player: SimplePlayer) {
         playerList.add(player)
         notifyItemInserted(playerList.size - 1)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updatePlayerList(playerList: List<Player>) {
+    fun updatePlayerList(playerList: List<SimplePlayer>) {
         if (this.playerList != playerList) {
             this.playerList.clear()
             this.playerList.addAll(playerList)

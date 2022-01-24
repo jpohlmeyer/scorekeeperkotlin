@@ -1,10 +1,11 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.screens.start
 
 import androidx.lifecycle.ViewModel
+import com.github.jpohlmeyer.scorekeeperkotlin.model.GameType
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class StartViewModel : ViewModel() {
-
-    // TODO how to fill from Model? LiveData?
-    val gameList : MutableList<String> = mutableListOf("Simple Game")
-
+@HiltViewModel
+class StartViewModel @Inject constructor() : ViewModel() {
+    val gameList : List<GameType> = GameType.values().toList()
 }

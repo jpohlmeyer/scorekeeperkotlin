@@ -3,22 +3,29 @@ package com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
+import com.github.jpohlmeyer.scorekeeperkotlin.GameService
+import com.github.jpohlmeyer.scorekeeperkotlin.model.SimpleGame
+import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
+import javax.inject.Inject
 
-class AddPlayersViewModel : ViewModel() {
+@HiltViewModel
+class AddPlayersViewModel @Inject constructor(
+    val gameService: GameService
+) : ViewModel() {
 
-    private val _playerLiveData: MutableLiveData<List<Player>> = MutableLiveData()
-    val playerLiveData: LiveData<List<Player>>
+    private val _playerLiveData: MutableLiveData<List<SimplePlayer>> = MutableLiveData()
+    val playerLiveData: LiveData<List<SimplePlayer>>
         get() = _playerLiveData
 
-    private val playerList: MutableList<Player> = mutableListOf()
+    private val playerList: MutableList<SimplePlayer> = gameService.game.playerList
 
     init {
         _playerLiveData.value = playerList
     }
 
-    fun addPlayer(player: Player) {
+    fun addPlayer(player: SimplePlayer) {
         playerList.add(player)
         _playerLiveData.value = playerList
     }
