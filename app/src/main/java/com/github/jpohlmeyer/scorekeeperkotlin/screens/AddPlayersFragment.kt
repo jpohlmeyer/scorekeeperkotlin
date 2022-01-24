@@ -60,7 +60,7 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
     }
 
     private fun addPlayerOnClick(view: View) {
-        val player = viewModel.gameService.game.playerType.primaryConstructor!!.call(binding.addPlayerName.text.toString())
+        val player = viewModel.game.playerType.primaryConstructor!!.call(binding.addPlayerName.text.toString())
         onItemAdded(player)
         binding.addPlayerName.setText("")
     }

@@ -41,7 +41,7 @@ class StartFragment : Fragment() {
             button.layoutParams = layoutParams
             button.text = gameType.gameTypeName
             button.setOnClickListener { view ->
-                viewModel.gameService.game = gameType.gameClass.primaryConstructor!!.call()
+                viewModel.setGame(gameType.gameClass.primaryConstructor!!.call())
                 val action = StartFragmentDirections.actionStartFragmentToAddPlayersFragment()
                 findNavController().navigate(action)
             }
