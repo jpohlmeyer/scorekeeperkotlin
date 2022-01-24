@@ -8,8 +8,8 @@ import java.util.*
 
 class AddPlayersViewModel : ViewModel() {
 
-    private val _playerLiveData: MutableLiveData<MutableList<Player>> = MutableLiveData()
-    val playerLiveData: LiveData<MutableList<Player>>
+    private val _playerLiveData: MutableLiveData<List<Player>> = MutableLiveData()
+    val playerLiveData: LiveData<List<Player>>
         get() = _playerLiveData
 
     private val playerList: MutableList<Player> = mutableListOf()
