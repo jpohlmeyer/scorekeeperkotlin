@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -55,12 +56,18 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
         viewModel.playerLiveData.observe(viewLifecycleOwner, playerListObserver)
 
         binding.addPlayerButton.setOnClickListener(this::addPlayerOnClick)
+        binding.startButton.setOnClickListener(this::startGameOnClick)
     }
 
     private fun addPlayerOnClick(view: View) {
         val player = viewModel.gameService.game.playerType.primaryConstructor!!.call(binding.addPlayerName.text.toString())
         onItemAdded(player)
         binding.addPlayerName.setText("")
+    }
+
+    private fun startGameOnClick(view: View) {
+        val action = AddPlayersFragmentDirections.actionAddPlayersFragmentToGameFragment()
+        findNavController().navigate(action)
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {

@@ -26,7 +26,7 @@ class GameFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        binding.text.text = viewModel.gameService.game.playerType.toString()
     }
 
     override fun onDestroyView() {
