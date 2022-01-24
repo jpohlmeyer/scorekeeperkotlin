@@ -14,6 +14,8 @@ import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentStartBinding
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.start.StartViewModel
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.reflect.full.createInstance
+import kotlin.reflect.full.primaryConstructor
 
 @AndroidEntryPoint
 class StartFragment : Fragment() {
@@ -32,14 +34,14 @@ class StartFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.gameList.forEach {
+        viewModel.gameList.forEach { gameType ->
             val button = MaterialButton(requireContext())
             val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT)
             button.layoutParams = layoutParams
-            button.text = it.gameTypeName
-            button.setOnClickListener {
-                // TODO choose which game, maybe gameService.setGame()?
+            button.text = gameType.gameTypeName
+            button.setOnClickListener { view ->
+                viewModel.gameService.game = gameType.gameClass.primaryConstructor!!.call()
                 val action = StartFragmentDirections.actionStartFragmentToAddPlayersFragment()
                 findNavController().navigate(action)
             }

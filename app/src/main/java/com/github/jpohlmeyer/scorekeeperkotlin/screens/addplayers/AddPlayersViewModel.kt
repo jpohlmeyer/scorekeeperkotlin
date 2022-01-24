@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.jpohlmeyer.scorekeeperkotlin.GameService
+import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
 import com.github.jpohlmeyer.scorekeeperkotlin.model.SimpleGame
 import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,17 +16,17 @@ class AddPlayersViewModel @Inject constructor(
     val gameService: GameService
 ) : ViewModel() {
 
-    private val _playerLiveData: MutableLiveData<List<SimplePlayer>> = MutableLiveData()
-    val playerLiveData: LiveData<List<SimplePlayer>>
+    private val _playerLiveData: MutableLiveData<List<Player>> = MutableLiveData()
+    val playerLiveData: LiveData<List<Player>>
         get() = _playerLiveData
 
-    private val playerList: MutableList<SimplePlayer> = gameService.game.playerList
+    private val playerList: MutableList<Player> = gameService.game.genericPlayerList
 
     init {
         _playerLiveData.value = playerList
     }
 
-    fun addPlayer(player: SimplePlayer) {
+    fun addPlayer(player: Player) {
         playerList.add(player)
         _playerLiveData.value = playerList
     }
