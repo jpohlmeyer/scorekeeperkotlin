@@ -36,16 +36,16 @@ class GameFragment : Fragment() {
     }
 
     fun populateTableWithPlayerNames() {
-        // TODO items as XML? for different gametypes?
-        val tableRow = TableRow(context)
-        tableRow.background = ResourcesCompat.getDrawable(requireContext().resources, R.drawable.border, null)
+        // TODO items as XML?
         viewModel.simpleGame().playerList.forEach { player ->
-            val nameTextView = TextView(context)
-            nameTextView.text = player.name
-            nameTextView.background = ResourcesCompat.getDrawable(requireContext().resources, R.drawable.border, null)
-            tableRow.addView(nameTextView)
+            val tableRow = layoutInflater.inflate(R.layout.simple_game_row, null)
+
+            tableRow.findViewById<TextView>(R.id.name).text = player.name
+            tableRow.findViewById<TextView>(R.id.totalpoints).text = player.points.toString()
+            tableRow.findViewById<TextView>(R.id.addpoints).text = ""
+
+            binding.pointTable.addView(tableRow)
         }
-        binding.pointTable.addView(tableRow)
     }
 
     override fun onDestroyView() {
