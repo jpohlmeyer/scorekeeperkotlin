@@ -1,35 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/border">
+    android:weightSum="1"
+    android:background="@color/dark_gray">
 
     <TextView
         android:id="@+id/name"
         android:gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Name"
-        android:background="@drawable/border"
+        android:layout_weight="0.5"
+        android:textSize="20sp"
+        android:textColor="@color/white"
         />
 
     <TextView
         android:id="@+id/totalpoints"
         android:gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Total Points"
-        android:background="@drawable/border"
+        android:layout_weight="0.25"
+        android:textSize="20sp"
+        android:textColor="@color/white"
         />
 
-    <TextView
-        android:id="@+id/addpoints"
+    <LinearLayout
+        android:id="@+id/addpoints_layout"
         android:gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Add Points"
-        android:background="@drawable/border"
-        />
+        android:layout_weight="0.25"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/addpoints"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:inputType="numberSigned"
+            android:textCursorDrawable="@null"
+            android:hint="0"
+            android:textColorHint="@color/light_gray"
+            android:gravity="right"/>
+
+        <ImageButton
+            android:id="@+id/add_points_button"
+            android:background="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            app:srcCompat="@drawable/ic_baseline_add_box_white_24" />
+
+    </LinearLayout>
 
 </TableRow>
