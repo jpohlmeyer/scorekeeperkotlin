@@ -1,4 +1,4 @@
-package com.github.jpohlmeyer.scorekeeperkotlin.screens
+package com.github.jpohlmeyer.scorekeeperkotlin.screens.simplegame
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,21 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.github.jpohlmeyer.scorekeeperkotlin.R
-import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentGameBinding
-import com.github.jpohlmeyer.scorekeeperkotlin.screens.game.GameViewModel
-import com.google.android.material.divider.MaterialDivider
+import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentSimpleGameBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GameFragment : Fragment() {
-    private var _binding: FragmentGameBinding? = null
+class SimpleGameFragment : Fragment() {
+    private var _binding: FragmentSimpleGameBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: GameViewModel by viewModels()
+    private val viewModel: SimpleGameViewModel by viewModels()
 
     // TODO make this work for different game types?
 
@@ -28,7 +25,7 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentGameBinding.inflate(inflater, container, false)
+        _binding = FragmentSimpleGameBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -38,7 +35,7 @@ class GameFragment : Fragment() {
     }
 
     private fun populateTableWithPlayerNames() {
-        viewModel.simpleGame().playerList.forEach { player ->
+        viewModel.game.playerList.forEach { player ->
             val tableRow = layoutInflater.inflate(R.layout.simple_game_row, binding.pointTable, false)
             tableRow.findViewById<TextView>(R.id.name).text = player.name
             val totalPoints: TextView = tableRow.findViewById(R.id.totalpoints)
@@ -57,7 +54,7 @@ class GameFragment : Fragment() {
     }
 
     private fun endGameButtonOnClick(view: View) {
-        val action = GameFragmentDirections.actionGameFragmentToStartFragment()
+        val action = SimpleGameFragmentDirections.actionGameFragmentToStartFragment()
         findNavController().navigate(action)
     }
 

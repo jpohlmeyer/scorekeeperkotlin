@@ -7,6 +7,7 @@ class SimpleGame : Game() {
 
     val playerList: MutableList<SimplePlayer>
         get() {
+            // TODO are checks necessary? else case should not happen...
             if (genericPlayerList.isEmpty() || genericPlayerList[0] is SimplePlayer) {
                 @Suppress("UNCHECKED_CAST")
                 return genericPlayerList as MutableList<SimplePlayer>

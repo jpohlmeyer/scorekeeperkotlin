@@ -1,4 +1,4 @@
-package com.github.jpohlmeyer.scorekeeperkotlin.screens
+package com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentAddPlayersBinding
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
-import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.AddPlayersViewModel
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnTouchListChangedListener
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnStartDragListener
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.PlayerListAdapter
@@ -24,6 +22,9 @@ import kotlin.reflect.full.primaryConstructor
 
 @AndroidEntryPoint
 class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedListener {
+
+
+    //TODO restrict player name to single line
 
     private var _binding: FragmentAddPlayersBinding? = null
     private val binding get() = _binding!!

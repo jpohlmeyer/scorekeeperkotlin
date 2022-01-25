@@ -7,5 +7,6 @@ import javax.inject.Singleton
 
 @Singleton
 class GameService @Inject constructor() {
+    // TODO no init?
     var game: Game = SimpleGame()
 }

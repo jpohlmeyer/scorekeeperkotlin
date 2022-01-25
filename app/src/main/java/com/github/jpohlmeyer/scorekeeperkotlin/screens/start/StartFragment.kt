@@ -1,20 +1,16 @@
-package com.github.jpohlmeyer.scorekeeperkotlin.screens
+package com.github.jpohlmeyer.scorekeeperkotlin.screens.start
 
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentStartBinding
-import com.github.jpohlmeyer.scorekeeperkotlin.screens.start.StartViewModel
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.reflect.full.createInstance
 import kotlin.reflect.full.primaryConstructor
 
 @AndroidEntryPoint
