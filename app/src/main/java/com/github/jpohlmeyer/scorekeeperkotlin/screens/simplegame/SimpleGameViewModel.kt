@@ -1,8 +1,12 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.screens.simplegame
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.jpohlmeyer.scorekeeperkotlin.GameService
+import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
 import com.github.jpohlmeyer.scorekeeperkotlin.model.SimpleGame
+import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -10,5 +14,24 @@ import javax.inject.Inject
 class SimpleGameViewModel @Inject constructor(
     gameService: GameService
 ) : ViewModel() {
-    var game: SimpleGame = gameService.game as SimpleGame
+    private var game: SimpleGame = gameService.game as SimpleGame
+
+    private val _playerLiveData: MutableList<MutableLiveData<SimplePlayer>> = mutableListOf()
+    val playerLiveData: List<LiveData<SimplePlayer>>
+        get() = _playerLiveData
+
+    private var playerList = game.playerList
+
+    init {
+        for (player in playerList) {
+            _playerLiveData.add(MutableLiveData(player))
+        }
+    }
+
+    fun addPoints(playerIndex: Int, points: Int) {
+        playerList[playerIndex].points += points
+        _playerLiveData[playerIndex].value = _playerLiveData[playerIndex].value
+    }
+
+
 }

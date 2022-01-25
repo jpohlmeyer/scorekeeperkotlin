@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.github.jpohlmeyer.scorekeeperkotlin.R
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentSimpleGameBinding
+import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
+import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,21 +38,23 @@ class SimpleGameFragment : Fragment() {
     }
 
     private fun populateTableWithPlayerNames() {
-        viewModel.game.playerList.forEach { player ->
+        for (i in viewModel.playerLiveData.indices) {
             val tableRow = layoutInflater.inflate(R.layout.simple_game_row, binding.pointTable, false)
-            tableRow.findViewById<TextView>(R.id.name).text = player.name
+            val playerName = tableRow.findViewById<TextView>(R.id.name)
             val totalPoints: TextView = tableRow.findViewById(R.id.totalpoints)
-            totalPoints.text = player.points.toString()
             val newPoints: EditText = tableRow.findViewById(R.id.addpoints)
             tableRow.findViewById<ImageButton>(R.id.add_points_button).setOnClickListener {
                 if (newPoints.text.isNotEmpty()) {
-                    // TODO do this with viewmodel
-                    totalPoints.text =
-                        ((totalPoints.text.toString()).toInt() + (newPoints.text.toString()).toInt()).toString()
+                    viewModel.addPoints(i, (newPoints.text.toString()).toInt())
                     newPoints.setText("")
                 }
             }
             binding.pointTable.addView(tableRow)
+            val playerObserver = Observer<SimplePlayer> { player ->
+                playerName.text = player.name
+                totalPoints.text = player.points.toString()
+            }
+            viewModel.playerLiveData[i].observe(viewLifecycleOwner, playerObserver)
         }
     }
 
