@@ -22,8 +22,6 @@ class SimpleGameFragment : Fragment() {
 
     private val viewModel: SimpleGameViewModel by viewModels()
 
-    // TODO make this work for different game types?
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
