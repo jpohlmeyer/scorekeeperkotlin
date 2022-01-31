@@ -13,7 +13,7 @@
 - [x] Start a game with the players on the list
 - [x] Add individual points for each player, display total amount
 - [x] Use ViewModel properly in GameFragment
-- [ ] SimpleGame: Submit points on keyboard submit?
+- [x] SimpleGame: Submit points on keyboard submit?
 - [ ] Tweak colors
 - [ ] Evaluate Fragment nav animations
 - [ ] Handle Back Navigation

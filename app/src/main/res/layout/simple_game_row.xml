@@ -49,7 +49,10 @@
             android:textCursorDrawable="@null"
             android:hint="0"
             android:textColorHint="@color/light_gray"
-            android:gravity="right"/>
+            android:gravity="end"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            />
 
         <ImageButton
             android:id="@+id/add_points_button"

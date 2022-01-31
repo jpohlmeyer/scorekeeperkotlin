@@ -14,6 +14,15 @@ import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentSimpleGameBin
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
 import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
 import dagger.hilt.android.AndroidEntryPoint
+import android.view.inputmethod.EditorInfo
+
+import android.view.KeyEvent
+
+import android.widget.TextView
+
+import android.widget.EditText
+import android.widget.TextView.OnEditorActionListener
+
 
 @AndroidEntryPoint
 class SimpleGameFragment : Fragment() {
@@ -41,7 +50,15 @@ class SimpleGameFragment : Fragment() {
             val playerName = tableRow.findViewById<TextView>(R.id.name)
             val totalPoints: TextView = tableRow.findViewById(R.id.totalpoints)
             val newPoints: EditText = tableRow.findViewById(R.id.addpoints)
-            tableRow.findViewById<ImageButton>(R.id.add_points_button).setOnClickListener {
+            val submitButton: ImageButton = tableRow.findViewById(R.id.add_points_button)
+            newPoints.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    submitButton.performClick()
+                    return@OnEditorActionListener true
+                }
+                false
+            })
+            submitButton.setOnClickListener {
                 if (newPoints.text.isNotEmpty()) {
                     viewModel.addPoints(i, (newPoints.text.toString()).toInt())
                     newPoints.setText("")
