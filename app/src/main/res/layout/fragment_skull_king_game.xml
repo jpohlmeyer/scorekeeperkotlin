@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.skullkinggame.SkullKingGameFragment">
+
+    <TextView
+        android:id="@+id/headline"
+        android:background="@color/orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Let's go!"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textAlignment="center"
+        />
+
+    <ScrollView
+        android:id="@+id/point_table_layout"
+        app:layout_constraintTop_toBottomOf="@id/headline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/navigate_layout"
+        android:background="@color/light_gray"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TableLayout
+            android:id="@+id/point_table"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:background="@color/dark_gray"
+                >
+
+                <TextView
+                    android:id="@+id/namehead"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:layout_weight="0.5"
+                    android:textColor="@color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/totalpointshead"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Total"
+                    android:layout_weight="0.25"
+                    android:textColor="@color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/addpointshead"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Add"
+                    android:layout_weight="0.25"
+                    android:textColor="@color/white"
+                    />
+
+            </TableRow>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TableRow
+                android:id="@+id/accordiontest1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:background="@color/dark_gray">
+
+                <TextView
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Round 1"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/accordiontest2"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:background="@color/dark_gray">
+
+                <TextView
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Round 2"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/accordiontest3"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:background="@color/dark_gray">
+
+                <TextView
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Round 3"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    />
+            </TableRow>
+
+        </TableLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:background="@color/orange"
+        android:id="@+id/navigate_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="80dp"
+        android:paddingEnd="80dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <Button
+            android:id="@+id/end_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Game"/>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

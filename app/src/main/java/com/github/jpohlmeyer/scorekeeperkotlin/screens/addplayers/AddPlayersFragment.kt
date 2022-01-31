@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentAddPlayersBinding
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
+import com.github.jpohlmeyer.scorekeeperkotlin.model.SimpleGame
+import com.github.jpohlmeyer.scorekeeperkotlin.model.SkullKingGame
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnTouchListChangedListener
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnStartDragListener
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.PlayerListAdapter
@@ -22,9 +24,6 @@ import kotlin.reflect.full.primaryConstructor
 
 @AndroidEntryPoint
 class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedListener {
-
-
-    //TODO restrict player name to single line
 
     private var _binding: FragmentAddPlayersBinding? = null
     private val binding get() = _binding!!
@@ -66,9 +65,15 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
         binding.addPlayerName.setText("")
     }
 
+    // TODO make navigation to game mode nicer
     private fun startGameOnClick(view: View) {
-        val action = AddPlayersFragmentDirections.actionAddPlayersFragmentToGameFragment()
-        findNavController().navigate(action)
+        if (viewModel.game is SimpleGame) {
+            val action = AddPlayersFragmentDirections.actionAddPlayersFragmentToSimpleGameFragment()
+            findNavController().navigate(action)
+        } else if (viewModel.game is SkullKingGame) {
+            val action = AddPlayersFragmentDirections.actionAddPlayersFragmentToSkullKingGameFragment()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {

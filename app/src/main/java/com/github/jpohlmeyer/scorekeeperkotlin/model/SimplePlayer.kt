@@ -1,7 +1,7 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.model
 
 class SimplePlayer (
-    name: String,
+    name: String
 ) : Player(name) {
     var points: Int = 0
 }

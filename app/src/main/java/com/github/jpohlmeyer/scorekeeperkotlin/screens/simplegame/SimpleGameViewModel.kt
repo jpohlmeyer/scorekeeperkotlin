@@ -33,5 +33,4 @@ class SimpleGameViewModel @Inject constructor(
         _playerLiveData[playerIndex].value = _playerLiveData[playerIndex].value
     }
 
-
 }

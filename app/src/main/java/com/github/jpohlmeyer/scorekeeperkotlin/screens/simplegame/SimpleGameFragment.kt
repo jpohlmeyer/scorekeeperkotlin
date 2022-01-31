@@ -74,7 +74,7 @@ class SimpleGameFragment : Fragment() {
     }
 
     private fun endGameButtonOnClick(view: View) {
-        val action = SimpleGameFragmentDirections.actionGameFragmentToStartFragment()
+        val action = SimpleGameFragmentDirections.actionSimpleGameFragmentToStartFragment()
         findNavController().navigate(action)
     }
 

@@ -11,8 +11,11 @@
         android:label="fragment_add_players"
         tools:layout="@layout/fragment_add_players" >
         <action
-            android:id="@+id/action_addPlayersFragment_to_gameFragment"
-            app:destination="@id/gameFragment" />
+            android:id="@+id/action_addPlayersFragment_to_simpleGameFragment"
+            app:destination="@id/simpleGameFragment" />
+        <action
+            android:id="@+id/action_addPlayersFragment_to_skullKingGameFragment"
+            app:destination="@id/skullKingGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/startFragment"
@@ -24,11 +27,19 @@
             app:destination="@id/addPlayersFragment" />
     </fragment>
     <fragment
-        android:id="@+id/gameFragment"
+        android:id="@+id/simpleGameFragment"
         android:name="com.github.jpohlmeyer.scorekeeperkotlin.screens.simplegame.SimpleGameFragment"
-        android:label="fragment_game">
+        android:label="fragment_simple_game">
         <action
-            android:id="@+id/action_gameFragment_to_startFragment"
+            android:id="@+id/action_simpleGameFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/skullKingGameFragment"
+        android:name="com.github.jpohlmeyer.scorekeeperkotlin.screens.skullkinggame.SkullKingGameFragment"
+        android:label="fragment_skull_king_game">
+        <action
+            android:id="@+id/action_skullKingGameFragment_to_startFragment"
             app:destination="@id/startFragment" />
     </fragment>
 </navigation>
