@@ -6,6 +6,7 @@
 - [x] Fragments and Navigation Graph
 - [x] ViewModel
 - [ ] F-Droid?
+- [ ] Deal with duplicate code in GameFragments (e.g. EndGame Button)
 
 ### Features/Bugs
 
