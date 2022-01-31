@@ -11,7 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.github.jpohlmeyer.scorekeeperkotlin.R
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentSkullKingGameBinding
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SkullKingPlayer
+import com.github.jpohlmeyer.scorekeeperkotlin.model.skullkinggame.SkullKingGame
+import com.github.jpohlmeyer.scorekeeperkotlin.model.skullkinggame.SkullKingPlayer
+import com.google.android.material.divider.MaterialDivider
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +24,7 @@ class SkullKingGameFragment : Fragment() {
 
     private val viewModel: SkullKingGameViewModel by viewModels()
 
-    private var toggle = true
+    private var toggle = Array(SkullKingGame.NUMBER_OF_ROUNDS) { false }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,65 +37,53 @@ class SkullKingGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initTable()
         binding.endButton.setOnClickListener(this::endGameButtonOnClick)
-        binding.accordiontest1.setOnClickListener(this::toggleAccordion)
     }
 
-    private fun toggleAccordion(view: View) {
-        // todo save accordion state in viewmodel?
-        val accordionIndex = binding.pointTable.indexOfChild(binding.accordiontest1)
-        if (toggle) {
-            for (i in viewModel.playerLiveData.indices) {
-                binding.pointTable.getChildAt(accordionIndex + i + 1).visibility = View.GONE
-            }
-        } else {
-            for (i in viewModel.playerLiveData.indices) {
-                binding.pointTable.getChildAt(accordionIndex + i + 1).visibility = View.VISIBLE
-            }
-        }
-        toggle = !toggle
-    }
-
+    // todo toggle indicator on each round?
+    // todo mermaid/skullking bonus?
+    // TODO add end round button?
     private fun initTable() {
-        val accordionIndex = binding.pointTable.indexOfChild(binding.accordiontest1)
-        for (i in viewModel.playerLiveData.indices) {
-            val tableRow = layoutInflater.inflate(R.layout.simple_game_row, binding.pointTable, false)
-            val playerName = tableRow.findViewById<TextView>(R.id.name)
-            val playerObserver = Observer<SkullKingPlayer> { player ->
-                playerName.text = player.name
-            }
-            viewModel.playerLiveData[i].observe(viewLifecycleOwner, playerObserver)
-            binding.pointTable.addView(tableRow, accordionIndex + i + 1)
-        }
-    }
+        for (roundIndex in 1..SkullKingGame.NUMBER_OF_ROUNDS) {
+            val roundRow = layoutInflater.inflate(R.layout.skull_king_game_round, binding.pointTable, false)
+            roundRow.findViewById<TextView>(R.id.roundtext).text = "Round $roundIndex"
+            binding.pointTable.addView(roundRow)
 
-//    private fun initTable() {
-//        for (i in viewModel.playerLiveData.indices) {
-//            val tableRow = layoutInflater.inflate(R.layout.simple_game_row, binding.pointTable, false)
-//            val playerName = tableRow.findViewById<TextView>(R.id.name)
-//            val totalPoints: TextView = tableRow.findViewById(R.id.totalpoints)
-//            val newPoints: EditText = tableRow.findViewById(R.id.addpoints)
-//            val submitButton: ImageButton = tableRow.findViewById(R.id.add_points_button)
-//            newPoints.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
-//                if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                    submitButton.performClick()
-//                    return@OnEditorActionListener true
-//                }
-//                false
-//            })
-//            submitButton.setOnClickListener {
-//                if (newPoints.text.isNotEmpty()) {
-//                    viewModel.addPoints(i, (newPoints.text.toString()).toInt())
-//                    newPoints.setText("")
-//                }
-//            }
-//            binding.pointTable.addView(tableRow)
-//            val playerObserver = Observer<SimplePlayer> { player ->
-//                playerName.text = player.name
-//                totalPoints.text = player.points.toString()
-//            }
-//            viewModel.playerLiveData[i].observe(viewLifecycleOwner, playerObserver)
-//        }
-//    }
+            val roundHeadRow = layoutInflater.inflate(R.layout.skull_king_game_head_row, binding.pointTable, false)
+            roundHeadRow.visibility = View.GONE
+            binding.pointTable.addView(roundHeadRow)
+
+            for (playerIndex in viewModel.playerLiveData.indices) {
+                val playerRow = layoutInflater.inflate(R.layout.skull_king_game_row, binding.pointTable, false)
+                playerRow.visibility = View.GONE
+
+                val playerName = playerRow.findViewById<TextView>(R.id.name)
+                val playerObserver = Observer<SkullKingPlayer> { player ->
+                    playerName.text = player.name
+                }
+                viewModel.playerLiveData[playerIndex].observe(viewLifecycleOwner, playerObserver)
+
+                binding.pointTable.addView(playerRow)
+            }
+            val divider = MaterialDivider(requireContext())
+            binding.pointTable.addView(divider)
+
+            roundRow.setOnClickListener {
+                val roundRowTableIndex = binding.pointTable.indexOfChild(roundRow)
+                if (toggle[roundIndex - 1]) {
+                    for (i in 1..(viewModel.playerLiveData.size + 1)) {
+                        binding.pointTable.getChildAt(roundRowTableIndex + i).visibility = View.GONE
+                    }
+                } else {
+                    for (i in 1..(viewModel.playerLiveData.size + 1)) {
+                        binding.pointTable.getChildAt(roundRowTableIndex + i).visibility = View.VISIBLE
+                    }
+                }
+                toggle[roundIndex - 1] = !toggle[roundIndex - 1]
+            }
+        }
+        // toggle round 1
+        binding.pointTable.getChildAt(0).callOnClick()
+    }
 
     private fun endGameButtonOnClick(view: View) {
         val action = SkullKingGameFragmentDirections.actionSkullKingGameFragmentToStartFragment()

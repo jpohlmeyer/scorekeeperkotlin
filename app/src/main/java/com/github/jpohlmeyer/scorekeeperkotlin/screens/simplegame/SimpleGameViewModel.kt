@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.jpohlmeyer.scorekeeperkotlin.GameService
-import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SimpleGame
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
+import com.github.jpohlmeyer.scorekeeperkotlin.model.simplegame.SimpleGame
+import com.github.jpohlmeyer.scorekeeperkotlin.model.simplegame.SimplePlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

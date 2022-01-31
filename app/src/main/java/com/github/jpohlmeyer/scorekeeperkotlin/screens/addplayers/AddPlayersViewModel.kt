@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.github.jpohlmeyer.scorekeeperkotlin.GameService
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Game
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SimpleGame
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject

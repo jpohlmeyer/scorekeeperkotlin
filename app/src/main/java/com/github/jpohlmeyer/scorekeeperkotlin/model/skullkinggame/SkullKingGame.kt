@@ -1,8 +1,15 @@
-package com.github.jpohlmeyer.scorekeeperkotlin.model
+package com.github.jpohlmeyer.scorekeeperkotlin.model.skullkinggame
 
+import com.github.jpohlmeyer.scorekeeperkotlin.model.Game
+import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
 import kotlin.reflect.KClass
 
 class SkullKingGame : Game() {
+
+    companion object {
+        val NUMBER_OF_ROUNDS = 10
+    }
+
     override val playerType: KClass<out Player> = SkullKingPlayer::class
 
     val playerList: MutableList<SkullKingPlayer>

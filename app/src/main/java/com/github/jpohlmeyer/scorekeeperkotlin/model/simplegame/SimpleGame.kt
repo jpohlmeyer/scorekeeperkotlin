@@ -1,5 +1,7 @@
-package com.github.jpohlmeyer.scorekeeperkotlin.model
+package com.github.jpohlmeyer.scorekeeperkotlin.model.simplegame
 
+import com.github.jpohlmeyer.scorekeeperkotlin.model.Game
+import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
 import kotlin.reflect.KClass
 
 class SimpleGame : Game() {

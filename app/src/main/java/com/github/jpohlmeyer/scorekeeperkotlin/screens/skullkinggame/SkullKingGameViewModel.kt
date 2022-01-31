@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.jpohlmeyer.scorekeeperkotlin.GameService
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SkullKingGame
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SkullKingPlayer
+import com.github.jpohlmeyer.scorekeeperkotlin.model.skullkinggame.SkullKingGame
+import com.github.jpohlmeyer.scorekeeperkotlin.model.skullkinggame.SkullKingPlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -26,5 +26,4 @@ class SkullKingGameViewModel @Inject constructor(
             _playerLiveData.add(MutableLiveData(player))
         }
     }
-
 }

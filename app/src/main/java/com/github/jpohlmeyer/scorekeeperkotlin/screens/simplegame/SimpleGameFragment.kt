@@ -11,12 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.github.jpohlmeyer.scorekeeperkotlin.R
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentSimpleGameBinding
-import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
+import com.github.jpohlmeyer.scorekeeperkotlin.model.simplegame.SimplePlayer
 import dagger.hilt.android.AndroidEntryPoint
 import android.view.inputmethod.EditorInfo
-
-import android.view.KeyEvent
 
 import android.widget.TextView
 

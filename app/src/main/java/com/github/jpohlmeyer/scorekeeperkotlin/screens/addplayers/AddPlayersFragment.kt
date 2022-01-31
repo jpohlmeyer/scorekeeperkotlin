@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentAddPlayersBinding
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SimpleGame
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SkullKingGame
+import com.github.jpohlmeyer.scorekeeperkotlin.model.simplegame.SimpleGame
+import com.github.jpohlmeyer.scorekeeperkotlin.model.skullkinggame.SkullKingGame
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnTouchListChangedListener
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.OnStartDragListener
 import com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist.PlayerListAdapter

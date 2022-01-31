@@ -1,14 +1,12 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.screens.addplayers.playerlist
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.DraggableStringListItemBinding
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
-import com.github.jpohlmeyer.scorekeeperkotlin.model.SimplePlayer
 import java.util.*
 
 class PlayerListAdapter(
