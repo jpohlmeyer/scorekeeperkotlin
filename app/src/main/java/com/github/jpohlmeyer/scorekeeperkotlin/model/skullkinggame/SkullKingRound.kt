@@ -5,6 +5,7 @@ import kotlin.math.abs
 class SkullKingRound(val roundNumber: Int) {
     var tricksGuessed: Int? = null
     var tricksGot: Int? = null
+    var bonus: Int = 0
 
     val points: Int
         get() = calculatePoints()
@@ -18,7 +19,7 @@ class SkullKingRound(val roundNumber: Int) {
                 if (tricksGuessed == 0) {
                     return roundNumber * 10
                 } else {
-                    return tricksGuessed!! * 20
+                    return (tricksGuessed!! * 20) + bonus
                 }
             }
         } else {

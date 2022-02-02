@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -67,12 +68,18 @@ class AddPlayersFragment : Fragment(), OnStartDragListener, OnTouchListChangedLi
 
     // TODO make navigation to game mode nicer
     private fun startGameOnClick(view: View) {
-        if (viewModel.game is SimpleGame) {
-            val action = AddPlayersFragmentDirections.actionAddPlayersFragmentToSimpleGameFragment()
-            findNavController().navigate(action)
-        } else if (viewModel.game is SkullKingGame) {
-            val action = AddPlayersFragmentDirections.actionAddPlayersFragmentToSkullKingGameFragment()
-            findNavController().navigate(action)
+        if (viewModel.playerLiveData.value?.isNotEmpty() == true) {
+            if (viewModel.game is SimpleGame) {
+                val action =
+                    AddPlayersFragmentDirections.actionAddPlayersFragmentToSimpleGameFragment()
+                findNavController().navigate(action)
+            } else if (viewModel.game is SkullKingGame) {
+                val action =
+                    AddPlayersFragmentDirections.actionAddPlayersFragmentToSkullKingGameFragment()
+                findNavController().navigate(action)
+            }
+        } else {
+            Toast.makeText(context, "You can not play without Players", Toast.LENGTH_SHORT).show()
         }
     }
 

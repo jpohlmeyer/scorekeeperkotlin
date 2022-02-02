@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="Guess"
-        android:layout_weight="0.25"
+        android:layout_weight="0.165"
         android:textColor="@color/white"
         />
 
@@ -39,7 +39,19 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="Result"
-        android:layout_weight="0.25"
+        android:layout_weight="0.165"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/bonus_head"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="Bonus"
+        android:layout_weight="0.165"
         android:textColor="@color/white"
         />
 

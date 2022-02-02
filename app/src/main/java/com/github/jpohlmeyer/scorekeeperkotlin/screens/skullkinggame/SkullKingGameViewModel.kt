@@ -26,4 +26,19 @@ class SkullKingGameViewModel @Inject constructor(
             _playerLiveData.add(MutableLiveData(player))
         }
     }
+
+    fun setTricksGuessed(playerIndex: Int, tricks: Int, round: Int) {
+        playerList[playerIndex].rounds[round].tricksGuessed = tricks
+        _playerLiveData[playerIndex].value = _playerLiveData[playerIndex].value
+    }
+
+    fun setTricksGot(playerIndex: Int, tricks: Int, round: Int) {
+        playerList[playerIndex].rounds[round].tricksGot = tricks
+        _playerLiveData[playerIndex].value = _playerLiveData[playerIndex].value
+    }
+
+    fun setBonus(playerIndex: Int, bonus: Int, round: Int) {
+        playerList[playerIndex].rounds[round].bonus = bonus
+        _playerLiveData[playerIndex].value = _playerLiveData[playerIndex].value
+    }
 }

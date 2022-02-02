@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="skull_king_last_player_padding">20dp</dimen>
+</resources>

@@ -1,10 +1,14 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.screens.skullkinggame
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.TableLayout
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -24,8 +28,6 @@ class SkullKingGameFragment : Fragment() {
 
     private val viewModel: SkullKingGameViewModel by viewModels()
 
-    private var toggle = Array(SkullKingGame.NUMBER_OF_ROUNDS) { false }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,20 +42,23 @@ class SkullKingGameFragment : Fragment() {
     }
 
     // todo toggle indicator on each round?
-    // todo mermaid/skullking bonus?
-    // TODO add end round button?
+    // TODO end round button on bottom? save values on switching rounds
     private fun initTable() {
         for (roundIndex in 1..SkullKingGame.NUMBER_OF_ROUNDS) {
-            val roundRow = layoutInflater.inflate(R.layout.skull_king_game_round, binding.pointTable, false)
+            val roundRow =
+                layoutInflater.inflate(R.layout.skull_king_game_round, binding.pointTable, false)
             roundRow.findViewById<TextView>(R.id.roundtext).text = "Round $roundIndex"
             binding.pointTable.addView(roundRow)
 
-            val roundHeadRow = layoutInflater.inflate(R.layout.skull_king_game_head_row, binding.pointTable, false)
+            val roundHeadRow =
+                layoutInflater.inflate(R.layout.skull_king_game_head_row, binding.pointTable, false)
             roundHeadRow.visibility = View.GONE
             binding.pointTable.addView(roundHeadRow)
 
+            var playerRow: View? = null
             for (playerIndex in viewModel.playerLiveData.indices) {
-                val playerRow = layoutInflater.inflate(R.layout.skull_king_game_row, binding.pointTable, false)
+                playerRow =
+                    layoutInflater.inflate(R.layout.skull_king_game_row, binding.pointTable, false)
                 playerRow.visibility = View.GONE
 
                 val playerName = playerRow.findViewById<TextView>(R.id.name)
@@ -62,27 +67,83 @@ class SkullKingGameFragment : Fragment() {
                 }
                 viewModel.playerLiveData[playerIndex].observe(viewLifecycleOwner, playerObserver)
 
+                val tricksGuessed = playerRow.findViewById<EditText>(R.id.tricks_guessed)
+                tricksGuessed.setOnEditorActionListener { _, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        if (tricksGuessed.text.isNotEmpty()) {
+                            viewModel.setTricksGuessed(
+                                playerIndex,
+                                (tricksGuessed.text.toString()).toInt(),
+                                roundIndex
+                            )
+                        }
+                    }
+                    false
+                }
+
+                val tricksGot = playerRow.findViewById<EditText>(R.id.tricks_got)
+                tricksGot.setOnEditorActionListener { _, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        if (tricksGot.text.isNotEmpty()) {
+                            viewModel.setTricksGot(
+                                playerIndex,
+                                (tricksGot.text.toString()).toInt(),
+                                roundIndex
+                            )
+                        }
+                    }
+                    false
+                }
+
+                val bonus = playerRow.findViewById<EditText>(R.id.bonus)
+                bonus.setOnEditorActionListener { _, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        if (bonus.text.isNotEmpty()) {
+                            viewModel.setBonus(
+                                playerIndex,
+                                (bonus.text.toString()).toInt(),
+                                roundIndex
+                            )
+                        }
+                    }
+                    false
+                }
+
                 binding.pointTable.addView(playerRow)
             }
+            playerRow?.setPadding(
+                0,
+                0,
+                0,
+                resources.getDimensionPixelSize(R.dimen.skull_king_last_player_padding)
+            )
+
             val divider = MaterialDivider(requireContext())
             binding.pointTable.addView(divider)
 
             roundRow.setOnClickListener {
-                val roundRowTableIndex = binding.pointTable.indexOfChild(roundRow)
-                if (toggle[roundIndex - 1]) {
-                    for (i in 1..(viewModel.playerLiveData.size + 1)) {
-                        binding.pointTable.getChildAt(roundRowTableIndex + i).visibility = View.GONE
-                    }
-                } else {
-                    for (i in 1..(viewModel.playerLiveData.size + 1)) {
-                        binding.pointTable.getChildAt(roundRowTableIndex + i).visibility = View.VISIBLE
-                    }
-                }
-                toggle[roundIndex - 1] = !toggle[roundIndex - 1]
+                toggleRound(roundIndex)
             }
         }
         // toggle round 1
         binding.pointTable.getChildAt(0).callOnClick()
+    }
+
+    private fun toggleRound(roundNumber: Int) {
+        val rowIndexOffset = viewModel.playerLiveData.size + 3
+
+        // hide all rows
+        for (round in 0 until SkullKingGame.NUMBER_OF_ROUNDS) {
+            for (row in round*rowIndexOffset+1 until (round+1)*rowIndexOffset) {
+                binding.pointTable.getChildAt(row).visibility = View.GONE
+            }
+        }
+
+        // show clicked row
+        val rowIndex = (roundNumber - 1) * rowIndexOffset
+        for (rowsInsideRound in rowIndex until rowIndex+rowIndexOffset) {
+            binding.pointTable.getChildAt(rowsInsideRound).visibility = View.VISIBLE
+        }
     }
 
     private fun endGameButtonOnClick(view: View) {
