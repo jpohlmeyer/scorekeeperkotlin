@@ -1,14 +1,14 @@
-# ScoreKeeper (Kotlin)
+# ScoreKeeper
 
-## TODO
+Android App to keep score while playing a board game.
 
-### Technical
+## Technical TODOs
 - [x] Fragments and Navigation Graph
 - [x] ViewModel
 - [ ] F-Droid?
 - [ ] Deal with duplicate code in GameFragments (e.g. EndGame Button)
 
-### Features/Bugs
+## Features/Bugs
 
 - [x] Add and sort players in a list
 - [x] Start a game with the players on the list
