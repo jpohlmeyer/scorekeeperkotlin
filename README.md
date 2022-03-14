@@ -21,3 +21,4 @@ Android App to keep score while playing a board game.
 - [ ] GameMode: Have rounds and each player gets points in a round? history of points
 - [ ] GameMode: Skull King
 - [ ] Game End Screen with player ranking
+- [ ] Add Start Player Selection
