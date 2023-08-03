@@ -30,13 +30,17 @@ class StartFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.selectPlayerButton.setOnClickListener {
+            val action = StartFragmentDirections.actionStartFragmentToSelectPlayerFragment()
+            findNavController().navigate(action)
+        }
         viewModel.gameList.forEach { gameType ->
             val button = MaterialButton(requireContext())
             val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT)
             button.layoutParams = layoutParams
             button.text = gameType.gameTypeName
-            button.setOnClickListener { view ->
+            button.setOnClickListener {
                 viewModel.setGame(gameType.gameClass.primaryConstructor!!.call())
                 val action = StartFragmentDirections.actionStartFragmentToAddPlayersFragment()
                 findNavController().navigate(action)
