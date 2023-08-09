@@ -12,6 +12,12 @@ import androidx.appcompat.widget.AppCompatImageView
 class SelectPlayerView(context: Context, attributeSet: AttributeSet) :
     AppCompatImageView(context, attributeSet) {
 
+    // TODO
+    //  - differentiate different fingers
+    //  - different color for each finger
+    //  - animation for countdown
+    //  - choose one finger and display
+
     private var dot: PointF? = null
 
     private val circlePaint =
