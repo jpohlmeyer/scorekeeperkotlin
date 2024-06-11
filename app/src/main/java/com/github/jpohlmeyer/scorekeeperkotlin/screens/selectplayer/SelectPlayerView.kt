@@ -15,6 +15,7 @@ class SelectPlayerView(context: Context, attributeSet: AttributeSet) :
     // TODO
     //  - differentiate different fingers
     //  - different color for each finger
+    //  - track and follow finger
     //  - animation for countdown
     //  - choose one finger and display
 
@@ -29,8 +30,16 @@ class SelectPlayerView(context: Context, attributeSet: AttributeSet) :
 
     init {
         setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                drawDot(event.x.toFloat(), event.y.toFloat())
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    drawDot(event.x, event.y)
+                }
+                MotionEvent.ACTION_UP -> {
+                    drawDot(100F, 100F)
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    drawDot(100F, 500F)
+                }
             }
             this.performClick()
         }
