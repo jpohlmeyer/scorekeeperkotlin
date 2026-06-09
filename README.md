@@ -2,23 +2,3 @@
 
 Android App to keep score while playing a board game.
 
-## Technical TODOs
-- [x] Fragments and Navigation Graph
-- [x] ViewModel
-- [ ] F-Droid?
-- [ ] Deal with duplicate code in GameFragments (e.g. EndGame Button)
-
-## Features/Bugs
-
-- [x] Add and sort players in a list
-- [x] Start a game with the players on the list
-- [x] Add individual points for each player, display total amount
-- [x] Use ViewModel properly in GameFragment
-- [x] SimpleGame: Submit points on keyboard submit?
-- [ ] Tweak colors
-- [ ] Evaluate Fragment nav animations
-- [ ] Handle Back Navigation
-- [ ] GameMode: Have rounds and each player gets points in a round? history of points
-- [ ] GameMode: Skull King
-- [ ] Game End Screen with player ranking
-- [ ] Add Start Player Selection
