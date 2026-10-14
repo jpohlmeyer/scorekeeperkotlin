@@ -1,0 +1,74 @@
+plugins {
+    id("com.android.application")
+    id("com.android.legacy-kapt")
+    id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
+}
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+android {
+    compileSdk = 37
+
+    defaultConfig {
+        applicationId = "com.github.jpohlmeyer.scorekeeperkotlin"
+        minSdk = 26
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    namespace = "com.github.jpohlmeyer.scorekeeperkotlin"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+}
+
+dependencies {
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.60.1")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    kapt("com.google.dagger:hilt-compiler:2.60.1")
+
+    //ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
+
+    // navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.9.8")
+    implementation("androidx.navigation:navigation-ui-ktx:2.9.8")
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect:2.3.21")
+
+    implementation("androidx.core:core-ktx:1.19.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("com.google.android.material:material:1.14.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
+}
+
+kapt {
+    correctErrorTypes = true
+}
