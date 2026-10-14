@@ -147,7 +147,7 @@ class SkullKingGameFragment : Fragment() {
     }
 
     private fun endGameButtonOnClick(view: View) {
-        val action = SkullKingGameFragmentDirections.actionSkullKingGameFragmentToStartFragment()
+        val action = SkullKingGameFragmentDirections.actionSkullKingGameFragmentToGameEndFragment()
         findNavController().navigate(action)
     }
 

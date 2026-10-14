@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_simpleGameFragment_to_startFragment"
             app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_simpleGameFragment_to_gameEndFragment"
+            app:destination="@id/gameEndFragment" />
     </fragment>
     <fragment
         android:id="@+id/skullKingGameFragment"
@@ -44,6 +47,9 @@
         <action
             android:id="@+id/action_skullKingGameFragment_to_startFragment"
             app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_skullKingGameFragment_to_gameEndFragment"
+            app:destination="@id/gameEndFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectPlayerFragment"
@@ -51,6 +57,15 @@
         android:label="fragment_select_player">
         <action
             android:id="@+id/action_selectPlayerFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameEndFragment"
+        android:name="com.github.jpohlmeyer.scorekeeperkotlin.screens.endgame.GameEndFragment"
+        android:label="fragment_game_end"
+        tools:layout="@layout/fragment_game_end">
+        <action
+            android:id="@+id/action_gameEndFragment_to_startFragment"
             app:destination="@id/startFragment" />
     </fragment>
 </navigation>

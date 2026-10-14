@@ -5,5 +5,5 @@ import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
 class SimplePlayer (
     name: String
 ) : Player(name) {
-    var points: Int = 0
+    override var points: Int = 0
 }

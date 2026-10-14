@@ -8,7 +8,7 @@ class SkullKingPlayer(
 
     val rounds: Array<SkullKingRound> = Array(SkullKingGame.NUMBER_OF_ROUNDS) { i -> SkullKingRound(i)}
 
-    val points: Int
+    override val points: Int
         get() = calculatePoints()
 
     private fun calculatePoints(): Int {
