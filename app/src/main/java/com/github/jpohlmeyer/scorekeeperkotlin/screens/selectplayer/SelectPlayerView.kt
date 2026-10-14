@@ -4,56 +4,102 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.PointF
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatImageView
 
-class SelectPlayerView(context: Context, attributeSet: AttributeSet) :
-    AppCompatImageView(context, attributeSet) {
+class SelectPlayerView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : AppCompatImageView(context, attrs, defStyleAttr) {
 
-    // TODO
-    //  - differentiate different fingers
-    //  - different color for each finger
-    //  - track and follow finger
-    //  - animation for countdown
-    //  - choose one finger and display
+    private var touchPoints: Map<Int, TouchPoint> = emptyMap()
+    private var selectedPointerId: Int? = null
 
-    private var dot: PointF? = null
+    var onTouchEventListener: ((pointerId: Int, x: Float, y: Float, isRemoved: Boolean) -> Unit)? = null
 
-    private val circlePaint =
-        Paint().apply {
-            isAntiAlias = true
-            color = Color.RED
-            style = Paint.Style.FILL_AND_STROKE
-        }
-
-    init {
-        setOnTouchListener { _, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    drawDot(event.x, event.y)
-                }
-                MotionEvent.ACTION_UP -> {
-                    drawDot(100F, 100F)
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    drawDot(100F, 500F)
-                }
-            }
-            this.performClick()
-        }
+    private val circlePaint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.FILL
     }
 
-    fun drawDot(posX: Float, posY: Float) {
-        this.dot = PointF(posX, posY)
-        this.invalidate()
+    private val strokePaint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        strokeWidth = 8f
+        color = Color.WHITE
+    }
+
+    private val selectedRingPaint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        strokeWidth = 12f
+        color = Color.YELLOW
+    }
+
+    private val textPaint = Paint().apply {
+        isAntiAlias = true
+        color = Color.WHITE
+        textSize = 48f
+        textAlign = Paint.Align.CENTER
+    }
+
+    fun updateData(points: Map<Int, TouchPoint>, selectedId: Int?) {
+        this.touchPoints = points
+        this.selectedPointerId = selectedId
+        invalidate()
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val actionMasked = event.actionMasked
+        val pointerIndex = event.actionIndex
+        val pointerId = event.getPointerId(pointerIndex)
+
+        when (actionMasked) {
+            MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> {
+                performClick()
+                val x = event.getX(pointerIndex)
+                val y = event.getY(pointerIndex)
+                onTouchEventListener?.invoke(pointerId, x, y, false)
+            }
+            MotionEvent.ACTION_MOVE -> {
+                for (i in 0 until event.pointerCount) {
+                    val id = event.getPointerId(i)
+                    val x = event.getX(i)
+                    val y = event.getY(i)
+                    onTouchEventListener?.invoke(id, x, y, false)
+                }
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP, MotionEvent.ACTION_CANCEL -> {
+                performClick()
+                val x = event.getX(pointerIndex)
+                val y = event.getY(pointerIndex)
+                onTouchEventListener?.invoke(pointerId, x, y, true)
+            }
+        }
+        return true
+    }
+
+    override fun performClick(): Boolean {
+        super.performClick()
+        return true
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        this.dot?.apply {
-            canvas.drawCircle(this.x, this.y, 50F, circlePaint)
+
+        for ((id, point) in touchPoints) {
+            val isSelected = (id == selectedPointerId)
+            val radius = if (isSelected) 160f else 130f
+
+            circlePaint.color = point.color
+            canvas.drawCircle(point.x, point.y, radius, circlePaint)
+            canvas.drawCircle(point.x, point.y, radius, strokePaint)
+
+            if (isSelected) {
+                canvas.drawCircle(point.x, point.y, radius + 20f, selectedRingPaint)
+            }
         }
     }
 }
