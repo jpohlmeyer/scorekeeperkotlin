@@ -38,13 +38,6 @@ class SelectPlayerView @JvmOverloads constructor(
         color = Color.YELLOW
     }
 
-    private val textPaint = Paint().apply {
-        isAntiAlias = true
-        color = Color.WHITE
-        textSize = 48f
-        textAlign = Paint.Align.CENTER
-    }
-
     fun updateData(points: Map<Int, TouchPoint>, selectedId: Int?) {
         this.touchPoints = points
         this.selectedPointerId = selectedId

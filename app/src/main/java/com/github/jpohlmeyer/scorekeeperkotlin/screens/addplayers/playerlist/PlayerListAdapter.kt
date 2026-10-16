@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.DraggableStringListItemBinding
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
-import java.util.*
+import java.util.Collections
 
 class PlayerListAdapter(
     private val onStartDragListener: OnStartDragListener
-    ) : RecyclerView.Adapter<PlayerNameViewHolder>() {
+) : RecyclerView.Adapter<PlayerNameViewHolder>() {
 
     private var playerList: MutableList<Player> = mutableListOf()
 
@@ -53,14 +53,9 @@ class PlayerListAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun updatePlayerList(playerList: List<Player>) {
         if (this.playerList != playerList) {
-            //Log.d("Adapter","list totally changed")
             this.playerList.clear()
             this.playerList.addAll(playerList)
             notifyDataSetChanged()
-        }// else {
-//            Log.d("Adapter","list NOT changed")
-//        }
+        }
     }
-
-
 }

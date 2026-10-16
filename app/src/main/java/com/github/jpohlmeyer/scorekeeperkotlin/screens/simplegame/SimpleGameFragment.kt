@@ -1,11 +1,15 @@
 package com.github.jpohlmeyer.scorekeeperkotlin.screens.simplegame
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.TextView.OnEditorActionListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -13,13 +17,6 @@ import com.github.jpohlmeyer.scorekeeperkotlin.R
 import com.github.jpohlmeyer.scorekeeperkotlin.databinding.FragmentSimpleGameBinding
 import com.github.jpohlmeyer.scorekeeperkotlin.model.simplegame.SimplePlayer
 import dagger.hilt.android.AndroidEntryPoint
-import android.view.inputmethod.EditorInfo
-
-import android.widget.TextView
-
-import android.widget.EditText
-import android.widget.TextView.OnEditorActionListener
-
 
 @AndroidEntryPoint
 class SimpleGameFragment : Fragment() {
@@ -31,7 +28,7 @@ class SimpleGameFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSimpleGameBinding.inflate(inflater, container, false)
         return binding.root
     }

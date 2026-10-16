@@ -1,8 +1,8 @@
 plugins {
-    id("com.android.application")
-    id("com.android.legacy-kapt")
-    id("com.google.dagger.hilt.android")
-    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLegacyKapt)
+    alias(libs.plugins.daggerHilt)
+    alias(libs.plugins.navigation)
 }
 
 kotlin {
@@ -46,27 +46,27 @@ android {
 
 dependencies {
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.60.1")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    kapt("com.google.dagger:hilt-compiler:2.60.1")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    //ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
+    // ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
-    // navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.9.8")
-    implementation("androidx.navigation:navigation-ui-ktx:2.9.8")
+    // Navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
-    implementation("org.jetbrains.kotlin:kotlin-reflect:2.3.21")
+    implementation(libs.kotlin.reflect)
 
-    implementation("androidx.core:core-ktx:1.19.0")
-    implementation("androidx.appcompat:appcompat:1.7.1")
-    implementation("com.google.android.material:material:1.14.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.3.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.google.material)
+    implementation(libs.androidx.constraintlayout)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
 
 kapt {

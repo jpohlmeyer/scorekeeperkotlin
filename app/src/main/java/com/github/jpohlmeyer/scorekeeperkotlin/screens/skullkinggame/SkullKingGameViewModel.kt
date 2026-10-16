@@ -13,13 +13,13 @@ import javax.inject.Inject
 class SkullKingGameViewModel @Inject constructor(
     gameService: GameService
 ) : ViewModel() {
-    private var game: SkullKingGame = gameService.game as SkullKingGame
+    private val game: SkullKingGame = gameService.game as SkullKingGame
 
     private val _playerLiveData: MutableList<MutableLiveData<SkullKingPlayer>> = mutableListOf()
     val playerLiveData: List<LiveData<SkullKingPlayer>>
         get() = _playerLiveData
 
-    private var playerList = game.playerList
+    private val playerList = game.playerList
 
     init {
         for (player in playerList) {

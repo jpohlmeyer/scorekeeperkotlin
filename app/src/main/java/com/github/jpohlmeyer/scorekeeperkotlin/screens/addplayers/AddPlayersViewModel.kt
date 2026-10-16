@@ -7,7 +7,7 @@ import com.github.jpohlmeyer.scorekeeperkotlin.GameService
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Game
 import com.github.jpohlmeyer.scorekeeperkotlin.model.Player
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.*
+import java.util.Collections
 import javax.inject.Inject
 
 @HiltViewModel
